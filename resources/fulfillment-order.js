@@ -22,16 +22,17 @@ function FulfillmentOrder(shopify) {
 assign(FulfillmentOrder.prototype, pick(base, ['get', 'buildUrl']));
 
 /**
- * Retrieve a list of all fulfillment orders for an order.
+ * Retrieves a list of fulfillment orders on a shop for a specific app.
  *
- * @param {Number} id Order ID
+ * @param {Object} [params] Query parameters
  * @return {Promise} Promise that resolves with the result
  * @public
  */
-FulfillmentOrder.prototype.list = function list(orderId) {
+FulfillmentOrder.prototype.list = function list(params) {
   const url = base.buildUrl.call(
-    { ...this, name: 'orders' },
-    `${orderId}/fulfillment_orders`
+    { ...this, name: 'assigned_fulfillment_orders' },
+    undefined,
+    params
   );
   return this.shopify.request(url, 'GET', this.name);
 };
@@ -84,6 +85,19 @@ FulfillmentOrder.prototype.move = function move(id, locationId) {
       }
     })
     .then((body) => body.original_fulfillment_order);
+};
+
+/**
+ * Retrieves a list of locations that a fulfillment order can potentially move
+ * to.
+ *
+ * @param {Number} id Fulfillment order ID
+ * @return {Promise} Promise that resolves with the result
+ * @public
+ */
+FulfillmentOrder.prototype.locationsForMove = function locationsForMove(id) {
+  const url = this.buildUrl(`${id}/locations_for_move`);
+  return this.shopify.request(url, 'GET', 'locations_for_move');
 };
 
 module.exports = FulfillmentOrder;

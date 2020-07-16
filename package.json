@@ -1,6 +1,6 @@
 {
   "name": "shopify-api-node",
-  "version": "3.2.0",
+  "version": "3.3.2",
   "description": "Shopify API bindings for Node.js",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,7 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "got": "^10.1.0",
+    "got": "^11.1.4",
     "lodash": "^4.17.10",
     "qs": "^6.5.2",
     "stopcock": "^1.0.0"
@@ -24,15 +24,15 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.9",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.1",
     "lint-staged": "^10.0.2",
-    "mocha": "^7.0.1",
-    "nock": "^11.7.0",
+    "mocha": "^8.0.1",
+    "nock": "^13.0.1",
     "nyc": "^15.0.0",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.2"
   },
   "scripts": {
     "test": "npm run lint && nyc --reporter=html --reporter=text mocha",

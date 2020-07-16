@@ -247,6 +247,8 @@ Each set of results may have the `nextPageParameters` and
 `previousPageParameters` properties. These properties specify respectively the
 parameters needed to fetch the next and previous page of results.
 
+This feature is only available on version 2.24.0 and above.
+
 ## Available resources and methods
 
 - accessScope
@@ -287,6 +289,10 @@ parameters needed to fetch the next and previous page of results.
   - `get(id[, params])`
   - `list([params])`
   - `update(id, params)`
+- cancellationRequest
+  - `accept(fulfillmentOrderId[, message])`
+  - `create(fulfillmentOrderId[, message])`
+  - `reject(fulfillmentOrderId[, message])`
 - carrierService
   - `create(params)`
   - `delete(id)`
@@ -414,8 +420,13 @@ parameters needed to fetch the next and previous page of results.
   - `cancel(id, params)`
   - `close(id[, message])`
   - `get(id)`
-  - `list(orderId)`
+  - `list([params])`
+  - `locationsForMove(id)`
   - `move(id, locationId)`
+- fulfillmentRequest
+  - `accept(fulfillmentOrderId[, message])`
+  - `create(fulfillmentOrderId, params)`
+  - `reject(fulfillmentOrderId[, message])`
 - fulfillmentService
   - `create(params)`
   - `delete(id)`
@@ -470,6 +481,7 @@ parameters needed to fetch the next and previous page of results.
   - `count([params])`
   - `create(params)`
   - `delete(id)`
+  - `fulfillmentOrders(id)`
   - `get(id[, params])`
   - `list([params])`
   - `open(id)`

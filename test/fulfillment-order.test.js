@@ -11,15 +11,21 @@ describe('Shopify#fulfillmentOrder', () => {
 
   afterEach(() => expect(scope.isDone()).to.be.true);
 
-  it('gets a list of fulfillment orders for a specific order', () => {
+  it('gets a list of fulfillment orders on a shop for a specific app', () => {
     const output = fixtures.res.list;
 
     scope
-      .get('/admin/orders/450789469/fulfillment_orders.json')
+      .get(
+        '/admin/assigned_fulfillment_orders.json' +
+          '?assignment_status=cancellation&location_ids[]=48752903'
+      )
       .reply(200, output);
 
     return shopify.fulfillmentOrder
-      .list(450789469)
+      .list({
+        assignment_status: 'cancellation',
+        location_ids: ['48752903']
+      })
       .then((data) => expect(data).to.deep.equal(output.fulfillment_orders));
   });
 
@@ -71,6 +77,20 @@ describe('Shopify#fulfillmentOrder', () => {
     return shopify.fulfillmentOrder
       .close(1025578642)
       .then((data) => expect(data).to.deep.equal(output.fulfillment_order));
+  });
+
+  it('gets a list of locations that a fulfillment order can move to', () => {
+    const output = fixtures.res.locationsForMove;
+
+    scope
+      .get('/admin/fulfillment_orders/1025578643/locations_for_move.json')
+      .reply(200, output);
+
+    return shopify.fulfillmentOrder
+      .locationsForMove(1025578643)
+      .then((data) => {
+        expect(data).to.deep.equal(output.locations_for_move);
+      });
   });
 
   it('moves a fulfillment order to a new location', () => {

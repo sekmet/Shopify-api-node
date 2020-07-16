@@ -9,6 +9,7 @@ const map = {
   asset: 'asset',
   balance: 'balance',
   blog: 'blog',
+  cancellationRequest: 'cancellation-request',
   carrierService: 'carrier-service',
   checkout: 'checkout',
   collect: 'collect',
@@ -29,6 +30,7 @@ const map = {
   fulfillment: 'fulfillment',
   fulfillmentEvent: 'fulfillment-event',
   fulfillmentOrder: 'fulfillment-order',
+  fulfillmentRequest: 'fulfillment-request',
   fulfillmentService: 'fulfillment-service',
   giftCard: 'gift-card',
   giftCardAdjustment: 'gift-card-adjustment',
@@ -86,7 +88,7 @@ function registerAll(Shopify) {
         })[prop];
       },
       set: function set(value) {
-        return Object.defineProperty(this, prop, { value })[prop];
+        Object.defineProperty(this, prop, { value })[prop];
       }
     });
   });
